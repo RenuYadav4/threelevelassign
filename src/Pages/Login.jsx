@@ -12,7 +12,7 @@ const Login = () => {
         <div className="absolute -bottom-12 right-60 w-42 h-42 bg-[#bba08a] opacity-50  rounded-full "></div>
 
         <div className='relative bg-[#51433d] rounded-2xl md:h-[95%] lg:h-[90%] md:w-[40%]  lg:w-3/6 xl:w-2/4 max-w-[400px] invisible sm:visible '>
-          <p className='visible'>I am a b.tech student</p>
+          <p className='visible'>a student</p>
         </div>
         {/* <img src="public\questionmark.png" alt="" className='h-50 w-50' /> */}
       </div>
