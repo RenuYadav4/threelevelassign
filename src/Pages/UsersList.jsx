@@ -4,7 +4,7 @@ import Search from '../Components/Search';
 import { UserContext } from '../context/context';
 
 const UsersList = () => {
-  const {data, setData} = useContext(UserContext)
+  const { data, setData } = useContext(UserContext)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
@@ -17,8 +17,8 @@ const UsersList = () => {
     try {
       const res = await getUser(page);
       // console.log(res);
-      setData(res.data?.data || []);    
-        setTotalPages(res.data.total_pages);
+      setData(res.data?.data || []);
+      setTotalPages(res.data.total_pages);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -28,6 +28,7 @@ const UsersList = () => {
 
   }
   useEffect(() => {
+
     getuserData();
   }, [page]);
 

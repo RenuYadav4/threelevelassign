@@ -13,9 +13,9 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route element={<ProtectedRoute />}>
             <Route path="/userslist" element={<UsersList />}></Route>
-            <Route path="/edituser" element={<EditUser />}></Route>
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/edituser" element={<EditUser />}></Route>
         </Routes>
       </Router>
     </UserProvider>

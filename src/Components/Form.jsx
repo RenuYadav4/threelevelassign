@@ -1,7 +1,6 @@
-import React, { useContext, useState, } from 'react'
+import React, { useState, } from 'react'
 import { IoIosArrowRoundForward } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/context';
 import { postData } from '../API/api';
 
 
@@ -28,10 +27,6 @@ const Form = () => {
             }
         });
     }
-
-
-
-    const { data, setData } = useContext(UserContext);
     const navigate = useNavigate();
 
     const addPostData = async () => {
@@ -48,13 +43,14 @@ const Form = () => {
                     setaddUser({ name: "", value: "" });
                     setTimeout(() => {
                         navigate('/userslist');
-                    }, 3000);                }
+                    }, 3000);
+                }
 
             } else {
                 setMessage("Login failed.Please try again.");
             }
         } catch (error) {
-            setMessage("Something went wrong. Please try again later");
+            setMessage("Something went wrong. Please try again");
             console.log(error);
         }
 
@@ -63,9 +59,13 @@ const Form = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         addPostData();
-        setTimeout(() => {
-            navigate('/userslist');
-        }, 3000);    };
+        {
+            !error &&
+            setTimeout(() => {
+                navigate('/userslist');
+            }, 3000);
+        }
+    };
 
     return (
         <>
