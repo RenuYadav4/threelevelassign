@@ -1,17 +1,8 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { IoIosArrowRoundForward } from 'react-icons/io';
-import { postUser } from '../API/api';
+import Form from '../Components/Form';
 
 const Login = () => {
   
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/userslist");
-  }
-
   return (
     <div className="relative flex bg-[#0d222e] overflow-hidden justify-center h-screen items-center">
 
@@ -22,30 +13,7 @@ const Login = () => {
 
         <div className='relative bg-[#253434] rounded-2xl h-[500px] md:w-[40%]  lg:w-3/6 xl:w-2/4 max-w-[400px] '>
           <h2 className=' py-7 px-4 text-3xl font-bold bg-gradient-to-r from-[#e06d3c] to-[#07988f] bg-clip-text text-transparent'>EmployWise</h2>
-          <form action="" className='flex flex-col' onSubmit={handleSubmit}>
-            <div className='relative'>
-              <label className="absolute top-2/4 left-[10px] -translate-y-[160%] bg-[#253434] px-[5px] text-[#07988f]">Enter email</label>
-              <input
-                type="email"
-                placeholder=''
-                className="shadow-xs shadow-yellow-50 w-[93%] p-3 mx-2 my-5 lg:w-[90%] lg:mx-4 bg-transparent text-white placeholder-gray-300 border border-gray-500 rounded-lg outline-none focus:border-white focus:ring-0 appearance-none"
-                required
-              />
-            </div>
-            <div className='relative'>
-            <label className="absolute top-1/2 left-[10px] -translate-y-[160%] bg-[#253434] px-[5px] text-[#07988f]">password</label>
-              <input
-                type="password"
-                placeholder=''
-                className="shadow-xs shadow-yellow-50 w-[93%] p-3 mx-2 my-5 lg:w-[90%] lg:mx-4 bg-transparent text-white placeholder-gray-300 border border-gray-500 rounded-lg outline-none focus:border-white focus:ring-0 appearance-none"
-                required
-              />
-            </div>
-            <button type='submit' className='flex justify-center mx-2 p-2 w-[120px]  cursor-pointer mt-6 md:text-gray-300 bg-transparent inset-shadow-sm inset-shadow-[#07988f] font-semibold  rounded-2xl' >
-              Login
-              <IoIosArrowRoundForward className='ml-1 text-2xl ' />
-            </button>
-          </form>
+          <Form/>
         </div>
     </div>
   )

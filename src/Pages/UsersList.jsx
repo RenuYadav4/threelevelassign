@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { getUser } from '../API/api';
-import User from '../Components/User';
 import Search from '../Components/Search';
+import { UserContext } from '../context/context';
 
 const UsersList = () => {
-  const [data, setData] = useState([]);
+  const {data, setData} = useContext(UserContext)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+
   const getuserData = async () => {
+    setLoading(true);
+    setError(null);
     try {
       const res = await getUser(page);
-      console.log(res);
-      setData(res.data.data);
-      setTotalPages(res.data.total_pages);
+      // console.log(res);
+      setData(res.data?.data || []);    
+        setTotalPages(res.data.total_pages);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -46,18 +49,11 @@ const UsersList = () => {
 
   return (
     <div className="relative h-screen flex justify-center items-center bg-[#0d222e]">
-      <div className="p-3 w-[80%] md:p-10 bg-[#fff] shadow-2xl shadow-black rounded-2xl">
-        <h2>user List</h2>
-        <Search/>
-        {data.length > 0 ? (
-          <ul className="md:grid grid-cols-3 gap-5">
-            {data.map((user) => (
-              <User key={user.id} user={user}/>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-center text-gray-600">No users found.</p>
-        )}
+      <div className="p-3 md:p-10 bg-[#fff] shadow-2xl shadow-black rounded-2xl">
+        <div className='flex flex-col gap-3'>
+          <h2 className='text-sm md:text-xl font-serif font-bold text-gray-600'>Users</h2>
+          <Search data={data} />
+        </div>
 
         {/* Pagination Control */}
         <div className="flex justify-between mt-4">

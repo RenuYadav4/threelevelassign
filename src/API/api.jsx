@@ -9,6 +9,6 @@ export const getUser = (page)=>{
     return api.get(`api/users?page=${page}`);
 }
 
-export const postUser = (post) => {
-    return api.post("/api/login", post);
-};
+export const postData = (post)=>{
+    return api.post("/api/login",post);
+}
