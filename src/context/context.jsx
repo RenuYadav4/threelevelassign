@@ -7,11 +7,11 @@ export const UserProvider = ({ children }) => {
     const [editing, setEditing] = useState(false);
     const [updated, setUpdated] = useState({});
     const [showForm, setShowForm] = useState(false);
-    const [message, setMessage] = useState(""); // State for success/error messages
+    const [editmessage, setEditmessage] = useState(""); // State for success/error messages
 
     return (
         <UserContext.Provider 
-        value={{ data, setData, editing, setEditing, updated, setUpdated, showForm, setShowForm, message, setMessage }} >
+        value={{ data, setData, editing, setEditing, updated, setUpdated, showForm, setShowForm, editmessage,setEditmessage, }} >
             {children}
         </UserContext.Provider>
     )

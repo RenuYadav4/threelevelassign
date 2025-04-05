@@ -12,7 +12,7 @@ const Form = () => {
 
     })
 
-    const { message, setMessage } = useContext(UserContext); 
+    const [ message, setMessage ] = useState(""); 
     const [error, setError] = useState(null);
 
     // this is just handling what is being written inside input field

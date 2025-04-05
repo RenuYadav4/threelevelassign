@@ -11,7 +11,7 @@ const EditUser = () => {
     email: "",
   });
   const { showForm, setShowForm } = useContext(UserContext);
-  const { message, setMessage } = useContext(UserContext);
+  const { editmessage, setEditmessage } = useContext(UserContext);
 
   useEffect(() => {
     if (updated) {
@@ -36,9 +36,9 @@ const EditUser = () => {
   // UPDATE
   const updatePostUser = async () => {
     try {
-      setMessage("Please Wait...")
+      setEditmessage("Please Wait...")
       const res = await updateUser(updated.id, editUser);
-      setMessage("User Updated");
+      setEditmessage("User Updated");
       setData((prev) => {
         return prev.map((user) =>
           user.id === updated.id ? { ...user, ...res } : user
@@ -57,20 +57,20 @@ const EditUser = () => {
 
     setTimeout(() => {
       setShowForm(false);
-      setMessage("");
+      setEditmessage("");
     }, 500);
   };
 
   return (
     <>
-      {message && (
+      {editmessage && (
         <p className="mt-[-580px] text-gray-900 ml-3 text-xl bg-green-200 p-2  absolute rounded">
-          {message}
+          {editmessage}
         </p>
       )}
         < form
           onSubmit={handleSubmit}
-          className="mb-3 md:mt-[-150px] bg-white p-2 rounded-lg shadow-md flex flex-col gap-2  max-w-sm">
+          className="mb-3 lg:mt-2 md:mt-[-150px] bg-white p-2 rounded-lg shadow-md flex flex-col gap-2  max-w-sm">
           <button
             type="submit"
             className="bg-gray-500 text-white rounded hover:bg-gray-700 p-1 "
