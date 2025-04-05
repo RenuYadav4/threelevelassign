@@ -1,26 +1,25 @@
-import React, { useState, } from 'react'
+import React, { useContext, useState, } from 'react'
 import { IoIosArrowRoundForward } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../API/api';
+import { UserContext } from '../context/context';
 
 
 const Form = () => {
-
     const [addUser, setaddUser] = useState({
         email: "",
         password: "",
 
     })
 
-    const [message, setMessage] = useState(""); // State for success/error messages
-
+    const { message, setMessage } = useContext(UserContext); 
+    const [error, setError] = useState(null);
 
     // this is just handling what is being written inside input field
     const handleInputChange = (e) => {
         const name = e.target.name;   //name from name field in input
         const value = e.target.value;   //value from value field in input for both email and password
         setaddUser((prev) => {
-            console.log(prev);
             return {
                 ...prev,
                 [name]: value,
@@ -50,6 +49,7 @@ const Form = () => {
                 setMessage("Login failed.Please try again.");
             }
         } catch (error) {
+            setError(error);
             setMessage("Something went wrong. Please try again");
             console.log(error);
         }
@@ -61,15 +61,15 @@ const Form = () => {
         addPostData();
         {
             !error &&
-            setTimeout(() => {
-                navigate('/userslist');
-            }, 3000);
+                setTimeout(() => {
+                    navigate('/userslist');
+                }, 3000);
         }
     };
 
     return (
         <>
-            {message && <p className='text-white ml-3 text-xl'>{message}</p>} {/* Display message */}
+            {message && <p className='text-white ml-3 text-xl'>{message}</p>}
             <form action="" className='flex flex-col' onSubmit={handleSubmit}>
                 <div className='relative'>
                     <label className="absolute top-2/4 left-[10px] -translate-y-[160%] bg-[#253434] px-[5px] text-[#07988f]">Enter email</label>

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import UsersList from "./Pages/UsersList";
-import EditUser from "./Pages/EditUser";
+import EditUser from "./Components/EditUser";
 import Login from "./Pages/Login";
 import { UserProvider } from "./context/context";
 import ProtectedRoute from "./Components/ProtectedRoute";
@@ -15,7 +15,7 @@ function App() {
             <Route path="/userslist" element={<UsersList />}></Route>
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
-          <Route path="/edituser" element={<EditUser />}></Route>
+          {/* <Route path="/edituser" element={<EditUser />}></Route> */}
         </Routes>
       </Router>
     </UserProvider>

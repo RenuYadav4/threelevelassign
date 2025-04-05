@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { getUser } from '../API/api';
 import Search from '../Components/Search';
 import { UserContext } from '../context/context';
+import EditUser from '../Components/EditUser';
 
 const UsersList = () => {
   const { data, setData } = useContext(UserContext)
@@ -9,9 +10,10 @@ const UsersList = () => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+  const {showForm} = useContext(UserContext);
 
   const getuserData = async () => {
+
     setLoading(true);
     setError(null);
     try {
@@ -49,7 +51,9 @@ const UsersList = () => {
     )
 
   return (
-    <div className="relative h-screen flex justify-center items-center bg-[#0d222e]">
+    <div className="relative h-screen flex flex-col justify-center items-center bg-[#0d222e]">
+      {/* render the form for edit */}
+      {showForm && <EditUser />}
       <div className="p-3 md:p-10 bg-[#fff] shadow-2xl shadow-black rounded-2xl">
         <div className='flex flex-col gap-3'>
           <h2 className='text-sm md:text-xl font-serif font-bold text-gray-600'>Users</h2>
