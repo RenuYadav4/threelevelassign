@@ -55,7 +55,7 @@ const {data,setData} = useContext(UserContext);
               // onClick={() => setEditing(!editing)}
               onClick={() => handleUpdateUser(user)}
             />
-            <MdDeleteOutline className='text-gray-600'
+            <MdDeleteOutline className='text-gray-600 cursor-pointer'
               onClick={() => handleDeleteUser(user)}
             />
           </div>
