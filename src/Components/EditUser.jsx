@@ -58,7 +58,7 @@ const EditUser = () => {
     setTimeout(() => {
       setShowForm(false);
       setEditmessage("");
-    }, 500);
+    }, 1000);
   };
 
   return (

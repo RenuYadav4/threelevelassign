@@ -2,7 +2,6 @@ import React, { useContext, useState, } from 'react'
 import { IoIosArrowRoundForward } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../API/api';
-import { UserContext } from '../context/context';
 
 
 const Form = () => {
@@ -12,7 +11,7 @@ const Form = () => {
 
     })
 
-    const [ message, setMessage ] = useState(""); 
+    const [ message, setMessage ] = useState("") ;
     const [error, setError] = useState(null);
 
     // this is just handling what is being written inside input field
@@ -42,7 +41,7 @@ const Form = () => {
                     setaddUser({ name: "", value: "" });
                     setTimeout(() => {
                         navigate('/userslist');
-                    }, 3000);
+                    },500);
                 }
 
             } else {
@@ -64,7 +63,7 @@ const Form = () => {
                 setTimeout(() => {
                     setMessage("");
                     navigate('/userslist');
-                }, 3000);
+                }, 2000);
         }
     };
 
