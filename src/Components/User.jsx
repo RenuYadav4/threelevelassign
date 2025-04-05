@@ -51,7 +51,7 @@ const {data,setData} = useContext(UserContext);
           </div>
           <div className='flex gap-1 absolute top-1 right-1'>
             <CiEdit
-              className='text-gray-600'
+              className='text-gray-600 cursor-pointer'
               // onClick={() => setEditing(!editing)}
               onClick={() => handleUpdateUser(user)}
             />
