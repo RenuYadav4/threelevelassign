@@ -36,7 +36,7 @@ const {data,setData} = useContext(UserContext);
 
 
   return (
-    <div className='cursor-pointer hover:border-1 rounded-2xl border-gray-400 hover:shadow-xl'>
+    <div className=' hover:border-1 rounded-2xl border-gray-400 hover:shadow-xl'>
       <div className="flex gap-4 whitespace-nowrap p-5">
         <img
           src={user.avatar}
