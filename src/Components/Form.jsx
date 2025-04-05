@@ -62,6 +62,7 @@ const Form = () => {
         {
             !error &&
                 setTimeout(() => {
+                    setMessage("");
                     navigate('/userslist');
                 }, 3000);
         }
