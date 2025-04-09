@@ -35,7 +35,7 @@ const PortfolioPreview = () => {
 
                     {/* Name + Bio */}
                     <div className="text-center md:text-left w-full overflow-x-auto">
-                        <h1 className="text-2xl md:text-4xl font-bold text-blue-800 mb-2 break-words">
+                        <h1 className="text-2xl md:text-4xl font-bold text-gray-600 mb-2 break-words">
                             {data.name}
                         </h1>
                         <p className="text-gray-700 text-base md:text-lg leading-relaxed break-words">

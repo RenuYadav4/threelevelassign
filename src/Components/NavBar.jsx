@@ -18,9 +18,9 @@ const Navbar = () => {
             <Link to="/portfolio-form" className="hover:text-blue-600 font-medium">
               Create Portfolio
             </Link>
-            <Link to="/preview" className="hover:text-blue-600 font-medium">
+            {/* <Link to="/preview" className="hover:text-blue-600 font-medium">
               Preview
-            </Link>
+            </Link> */}
             <Link to="https://resume-analyzer-chi.vercel.app/" className="hover:text-blue-600 font-medium">
               Analyze your resume
             </Link>
