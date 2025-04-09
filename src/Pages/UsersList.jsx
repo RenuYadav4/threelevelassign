@@ -3,6 +3,8 @@ import { getUser } from '../API/api';
 import Search from '../Components/Search';
 import { UserContext } from '../context/context';
 import EditUser from '../Components/EditUser';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../Components/NavBar';
 
 const UsersList = () => {
   const { data, setData } = useContext(UserContext)
@@ -10,10 +12,11 @@ const UsersList = () => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const {showForm} = useContext(UserContext);
+  const { showForm } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const getuserData = async () => {
-
     setLoading(true);
     setError(null);
     try {
@@ -52,6 +55,15 @@ const UsersList = () => {
 
   return (
     <div className="relative h-screen flex flex-col justify-center items-center bg-[#0d222e]">
+      <div className="mt-4 flex justify-end">
+        <Navbar/>
+          {/* <button
+            onClick={() => navigate("/portfolio-form")}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm"
+          >
+            Generate Portfolio
+          </button> */}
+        </div>
       {/* render the form for edit */}
       {showForm && <EditUser />}
       <div className="p-3 md:p-10 bg-[#fff] shadow-2xl shadow-black rounded-2xl">
@@ -59,6 +71,8 @@ const UsersList = () => {
           <h2 className='text-sm md:text-xl font-serif font-bold text-gray-600'>Users</h2>
           <Search data={data} />
         </div>
+
+        
 
         {/* Pagination Control */}
         <div className="flex justify-between mt-4">
