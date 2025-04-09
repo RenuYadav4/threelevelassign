@@ -21,6 +21,9 @@ const Navbar = () => {
             <Link to="/preview" className="hover:text-blue-600 font-medium">
               Preview
             </Link>
+            <Link to="https://resume-analyzer-chi.vercel.app/" className="hover:text-blue-600 font-medium">
+              Analyze your resume
+            </Link>
             <button
               onClick={handleLogout}
               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"

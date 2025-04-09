@@ -3,22 +3,41 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 
 const PortfolioForm = () => {
-  const [step, setStep] = useState(1);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     bio: "",
     skills: "",
-    projects: ""
+    projects: {
+      description: "",
+      link: ""
+    },
+    experience: {
+      company: "",
+      role: "",
+      duration: ""
+    },
+    education: {
+      institute: "",
+      degree: "",
+      year: ""
+    }
   });
 
-  const navigate = useNavigate();
-
-  const next = () => setStep((prev) => prev + 1);
-  const prev = () => setStep((prev) => prev - 1);
-
-  const handleChange = (e) => {
+  const handleChange = (e, section, field) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    if (section) {
+      setFormData(prev => ({
+        ...prev,
+        [section]: {
+          ...prev[section],
+          [field]: value
+        }
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -27,84 +46,123 @@ const PortfolioForm = () => {
     navigate("/preview");
   };
 
-  const renderInput = (label, name, type = "text", isTextarea = false) => (
-    <div className='relative my-6'>
-      <label className="absolute top-1/2 left-[10px] -translate-y-[160%] bg-[#0d222e] px-[5px] text-[#07988f] capitalize">{label}</label>
+  const StyledInput = ({ label, name, value, onChange, type = "text", isTextarea }) => (
+    <div className="relative w-full md:w-[48%] my-3">
+      <label className="absolute top-[-12px] left-[10px] text-sm sm:top-1/2 sm:-translate-y-[160%] sm:text-base bg-[#0d222e] px-[5px] text-[#07988f] capitalize z-10">
+        {label}
+      </label>
       {isTextarea ? (
         <textarea
           name={name}
-          value={formData[name]}
-          onChange={handleChange}
-          className="shadow-xs shadow-yellow-50 w-full p-3 bg-transparent text-gray-300 border border-gray-500 rounded-lg outline-none focus:border-white"
+          value={value}
+          onChange={onChange}
+          rows={3}
+          className="shadow-xs shadow-yellow-50 w-full p-2 sm:p-3 bg-transparent text-gray-300 border border-gray-500 rounded-lg outline-none focus:border-white resize-none"
           required
         />
       ) : (
         <input
           type={type}
           name={name}
-          value={formData[name]}
-          onChange={handleChange}
-          className="shadow-xs shadow-yellow-50 w-full p-3 bg-transparent text-gray-300 border border-gray-500 rounded-lg outline-none focus:border-white"
+          value={value}
+          onChange={onChange}
+          className="shadow-xs shadow-yellow-50 w-full p-2 sm:p-3 bg-transparent text-gray-300 border border-gray-500 rounded-lg outline-none focus:border-white"
           required
         />
       )}
     </div>
   );
+  
+  
 
   return (
-    <div className="min-h-screen bg-[#0d222e] pt-24 flex items-center justify-center p-4">
-      <div className="bg-transparent shadow-lg shadow-amber-700 border border-gray-700 rounded-lg p-6 w-full max-w-lg">
-        {step === 1 && (
-          <form onSubmit={(e) => { e.preventDefault(); next(); }} className='flex flex-col'>
-            {renderInput("Your Name", "name")}
-            <button type='submit' className='flex justify-center w-[130px] mt-6 text-gray-300 bg-transparent border border-[#07988f] p-2 rounded-2xl'>
-              Next <IoIosArrowRoundForward className='ml-1 text-2xl' />
-            </button>
-          </form>
-        )}
+    <div className="min-h-screen bg-[#0d222e] flex items-center justify-center p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-transparent shadow-lg shadow-amber-700 border border-gray-700 rounded-xl p-6 w-full max-w-6xl"
+      >
+        <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 justify-between">
+          {StyledInput({ label: "Your Name", name: "name", value: formData.name, onChange: handleChange })}
+          {StyledInput({ label: "Short Bio", name: "bio", value: formData.bio, onChange: handleChange })}
+          {StyledInput({ label: "Skills (comma separated)", name: "skills", value: formData.skills, onChange: handleChange })}
 
-        {step === 2 && (
-          <form onSubmit={(e) => { e.preventDefault(); next(); }} className='flex flex-col'>
-            {renderInput("Short Bio", "bio", "text")}
-            <div className='flex justify-between mt-6'>
-              <button type='button' onClick={prev} className='text-gray-300 border border-gray-500 px-4 py-2 rounded-lg'>
-                Back
-              </button>
-              <button type='submit' className='text-gray-300 border border-[#07988f] px-4 py-2 rounded-lg'>
-                Next
-              </button>
+          {/* Project Section */}
+          <div className="w-full mt-4">
+            <h3 className="text-[#07988f] text-lg font-semibold mb-2">Project</h3>
+            <div className="flex flex-col md:flex-row md:gap-4">
+              {StyledInput({
+                label: "Project Description",
+                name: "description",
+                value: formData.projects.description,
+                onChange: (e) => handleChange(e, "projects", "description"),
+                
+              })}
+              {StyledInput({
+                label: "Project Link (GitHub / Live URL)",
+                name: "link",
+                value: formData.projects.link,
+                onChange: (e) => handleChange(e, "projects", "link")
+              })}
             </div>
-          </form>
-        )}
+          </div>
 
-        {step === 3 && (
-          <form onSubmit={(e) => { e.preventDefault(); next(); }} className='flex flex-col'>
-            {renderInput("Skills", "skills")}
-            <div className='flex justify-between mt-6'>
-              <button type='button' onClick={prev} className='text-gray-300 border border-gray-500 px-4 py-2 rounded-lg'>
-                Back
-              </button>
-              <button type='submit' className='text-gray-300 border border-[#07988f] px-4 py-2 rounded-lg'>
-                Next
-              </button>
+          {/* Education Section */}
+          <div className="w-full mt-4">
+            <h3 className="text-[#07988f] text-lg font-semibold mb-2">Education</h3>
+            <div className="flex flex-col md:flex-row md:gap-4">
+              {StyledInput({
+                label: "Institute Name",
+                name: "institute",
+                value: formData.education.institute,
+                onChange: (e) => handleChange(e, "education", "institute")
+              })}
+              {StyledInput({
+                label: "Degree / Program",
+                name: "degree",
+                value: formData.education.degree,
+                onChange: (e) => handleChange(e, "education", "degree")
+              })}
+              {StyledInput({
+                label: "Year",
+                name: "year",
+                value: formData.education.year,
+                onChange: (e) => handleChange(e, "education", "year")
+              })}
             </div>
-          </form>
-        )}
+          </div>
 
-        {step === 4 && (
-          <form onSubmit={handleSubmit} className='flex flex-col'>
-            {renderInput("Projects", "projects", "text")}
-            <div className='flex justify-between mt-6'>
-              <button type='button' onClick={prev} className='text-gray-300 border border-gray-500 px-4 py-2 rounded-lg'>
-                Back
-              </button>
-              <button type='submit' className='text-gray-300 border border-green-600 px-4 py-2 rounded-lg'>
-                Preview
-              </button>
+          {/* Experience Section */}
+          <div className="w-full mt-4">
+            <h3 className="text-[#07988f] text-lg font-semibold mb-2">Experience</h3>
+            <div className="flex flex-col md:flex-row md:gap-4">
+              {StyledInput({
+                label: "Company Name",
+                name: "company",
+                value: formData.experience.company,
+                onChange: (e) => handleChange(e, "experience", "company")
+              })}
+              {StyledInput({
+                label: "Role",
+                name: "role",
+                value: formData.experience.role,
+                onChange: (e) => handleChange(e, "experience", "role")
+              })}
+              {StyledInput({
+                label: "Duration",
+                name: "duration",
+                value: formData.experience.duration,
+                onChange: (e) => handleChange(e, "experience", "duration")
+              })}
             </div>
-          </form>
-        )}
-      </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-8">
+          <button type="submit" className="flex items-center gap-1 text-gray-300 border border-[#07988f] px-6 py-2 rounded-2xl hover:bg-[#07988f]/20 transition-all duration-200">
+            Preview <IoIosArrowRoundForward className='text-2xl' />
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

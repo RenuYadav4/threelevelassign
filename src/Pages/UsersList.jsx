@@ -14,7 +14,7 @@ const UsersList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const { showForm } = useContext(UserContext);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const getuserData = async () => {
     setLoading(true);
